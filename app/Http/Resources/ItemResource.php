@@ -33,6 +33,7 @@ class ItemResource extends JsonResource
             'stock' => $this->stock,
             'sku' => $this->sku,
             'reorderLevel' => $this->reorder_level,
+            'user' => new UserResource($this->whenLoaded('user'))
         ];
     }
 }
