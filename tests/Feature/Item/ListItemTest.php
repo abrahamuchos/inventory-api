@@ -28,7 +28,7 @@ it('return items low in stock', function () {
     Item::factory(5)->create(['stock' => 15, 'reorder_level' => 5]);
     Item::factory(5)->create(['stock' => 2, 'reorder_level' => 5]);
 
-    $response = get('/api/v1/item?lowStock');
+    $response = get('/api/v1/item?lowStock=true');
 
     $response->assertStatus(200)
         ->assertJsonStructure([
