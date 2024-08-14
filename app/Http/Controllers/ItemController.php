@@ -2,21 +2,36 @@
 
 namespace App\Http\Controllers;
 
+use App\Filters\ItemFilter;
 use App\Http\Resources\ItemResource;
 use App\Models\Item;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class ItemController extends Controller
 {
     /**
-     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     * @param Request $request
+     *
+     * @return AnonymousResourceCollection
      */
-    public function index(): \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+    public function index(Request $request): AnonymousResourceCollection
     {
-        $items = Item::with('user')->get();
+        $filter = new ItemFilter();
+        $queryItems = $filter->transform($request);
+        $items = Item::where($queryItems);
 
-        return ItemResource::collection($items);
+        if($request->query('lowStock')){
+            $items = Item::whereColumn('stock', '<', 'reorder_level');
+        }
+
+        if($request->query('includeUser')){
+            $items = $items->with('user');
+        }
+
+
+        return ItemResource::collection($items->paginate()->appends($request->query()));
     }
 
     /**
