@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Filters\ItemFilter;
+use App\Http\Requests\UpdateItemRequest;
 use App\Http\Resources\ItemResource;
 use App\Models\Item;
 use Illuminate\Http\JsonResponse;
@@ -65,4 +66,18 @@ class ItemController extends Controller
 
         return response()->json($item, 201);
     }
+
+    /**
+     * @param UpdateItemRequest $request
+     * @param Item    $item
+     *
+     * @return JsonResponse
+     */
+    public function update(UpdateItemRequest $request, Item $item): JsonResponse
+    {
+        $item->update($request->all());
+
+        return response()->json([], 201);
+    }
+
 }
