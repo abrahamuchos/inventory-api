@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\StockController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,11 +17,18 @@ Route::group(['prefix' => 'v1/'], function () {
 
     /* Private Routes */
     Route::middleware('auth:sanctum')->group(function () {
+        /*Item*/
         Route::post('/item', [ItemController::class, 'store']);
         Route::patch('/item/{item}', [ItemController::class, 'update']);
         Route::put('/item/{item}', [ItemController::class, 'update']);
         Route::delete('item/{item}', [ItemController::class, 'destroy']);
+
+        /*Stock*/
+        Route::post('/stock/{item:sku}', [StockController::class, 'store']);
+
+
     });
+
 
 });
 
