@@ -1,12 +1,16 @@
 <?php
 
+use App\Events\StockAdded;
+use App\Events\StockReduce;
 use App\Models\Item;
+use \Illuminate\Support\Facades\Event;
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\postJson;
 
 it('block to anonymous users', function (){
-    postJson('api/v1/stock', [])
+    $item = Item::factory()->create();
+    postJson("api/v1/stock/$item->sku", [])
         ->assertUnauthorized();
 });
 
@@ -29,6 +33,7 @@ it('validate required request fields', function (){
  * Test if stock can add
  */
 it('can add stock by sku', function () {
+    Event::fake();
     $item = Item::factory()->create();
 
     $response = actingAs($item->user)->postJson("api/v1/stock/$item->sku", [
@@ -45,6 +50,7 @@ it('can add stock by sku', function () {
        'sku' => $item->sku,
        'stock' => $item->stock + 10
     ]);
+    Event::assertDispatched(StockAdded::class);
 });
 
 it('can reduce fewer fields than there are', function () {
@@ -64,6 +70,7 @@ it('can reduce fewer fields than there are', function () {
  * Test reduce stock
  */
 it('can reduce stock by sku', function () {
+    Event::fake();
     $item = Item::factory()->create(['stock' => 100]);
 
     $response = actingAs($item->user)->postJson("api/v1/stock/$item->sku", [
@@ -80,5 +87,6 @@ it('can reduce stock by sku', function () {
         'sku' => $item->sku,
         'stock' => $item->stock - 5
     ]);
+    Event::assertDispatched(StockReduce::class);
 });
 
