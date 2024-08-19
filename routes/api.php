@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\StockController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -12,6 +14,11 @@ Route::get('/user', function (Request $request) {
 Route::group(['prefix' => 'v1/'], function () {
 
     /* Public Routes */
+    //User
+    Route::post('register', [UserController::class, 'store']);
+    Route::post('login', [AuthController::class, 'login']);
+
+    //Item
     Route::get('item/{item:sku}', [ItemController::class, 'show']);
     Route::get('item', [ItemController::class, 'index']);
 
