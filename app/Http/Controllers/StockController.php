@@ -49,4 +49,21 @@ class StockController extends Controller
         return new ItemResource($item);
     }
 
+    public function show(Item $item): \Illuminate\Http\JsonResponse
+    {
+        $status = 'ok';
+
+        if($item->stock <= $item->reorder_level){
+            $status = 'low';
+        }
+
+
+        return response()->json([
+           'data' => [
+               'stock' => $item->stock,
+               'reorderLevel' => $item->reorder_level,
+               'level' => $status
+           ]
+        ]);
+    }
 }
