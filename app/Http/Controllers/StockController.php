@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\StockAdded;
+use App\Events\StockReduce;
 use App\Http\Resources\ItemResource;
 use App\Models\Item;
 use Exception;
@@ -23,12 +25,15 @@ class StockController extends Controller
             'action' => 'required|in:add,reduce'
         ]);
 
-        if ($request->input('action') === 'add' || $request->input('action') === 'reduce' && ($request->input('qty') <= $item->stock)) {
-            $item->stock = match ($request->input('action')) {
-                'add' => $item->stock += $request->input('qty'),
-                'reduce' => $item->stock -= $request->input('qty')
-            };
+        if($request->input('action') === 'add'){
+            $item->stock += $request->input('qty');
             $item->save();
+            StockAdded::dispatch($item);
+
+        }else if($request->input('action') === 'reduce' && ($request->input('qty') <= $item->stock)){
+            $item->stock -= $request->input('qty');
+            $item->save();
+            StockReduce::dispatch($item);
 
         } else {
 
