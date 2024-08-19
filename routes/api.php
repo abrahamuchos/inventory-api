@@ -25,7 +25,7 @@ Route::group(['prefix' => 'v1/'], function () {
 
         /*Stock*/
         Route::post('/stock/{item:sku}', [StockController::class, 'store']);
-
+        Route::get('/stock/{item:sku}', [StockController::class, 'show']);
 
     });
 
