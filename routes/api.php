@@ -34,6 +34,9 @@ Route::group(['prefix' => 'v1/'], function () {
         Route::post('/stock/{item:sku}', [StockController::class, 'store']);
         Route::get('/stock/{item:sku}', [StockController::class, 'show']);
 
+        /*User*/
+        Route::get('logout', [AuthController::class, 'logout']);
+
     });
 
 

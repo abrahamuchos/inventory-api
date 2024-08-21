@@ -42,6 +42,19 @@ class AuthController extends Controller
     }
 
     /**
+     * @param Request $request
+     *
+     * @return JsonResponse
+     */
+    public function logout(Request $request): JsonResponse
+    {
+        $user = $request->user();
+        $user->currentAccessToken()->delete();
+
+        return response()->json([]);
+    }
+
+    /**
      * @param User $user
      *
      * @return \Laravel\Sanctum\NewAccessToken
