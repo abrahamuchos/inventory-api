@@ -1,0 +1,1069 @@
+{
+	"info": {
+		"_postman_id": "0da64ad0-4488-42d8-bd8a-6b72b4e5023c",
+		"name": "Inventory API",
+		"description": "Rest API for managing items, repurchase, users and stock.\n\n- Add item\n    \n- Update items\n    \n- Get item\n    \n- Get stock and reorder\n    \n- Add stock\n    \n- Register user\n    \n- Login user\n    \n\n_Developed under the TDD methodology, Laravel 11, Pest 2 and SqLite._",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6168326",
+		"_collection_link": "https://www.postman.com/abrahamuchos/workspace/public-projects/collection/6168326-0da64ad0-4488-42d8-bd8a-6b72b4e5023c?action=share&source=collection_link&creator=6168326"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Abraham Gonzalez",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "abraham@test.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "password_confirmation",
+									"value": "password",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url_v1}}/register",
+							"host": [
+								"{{url_v1}}"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "abraham@test.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url_v1}}/login",
+							"host": [
+								"{{url_v1}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Items",
+			"item": [
+				{
+					"name": "All Items",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url_v1}}/item",
+							"host": [
+								"{{url_v1}}"
+							],
+							"path": [
+								"item"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "lowStock",
+									"value": "true",
+									"description": "Optional",
+									"disabled": true
+								},
+								{
+									"key": "name[eq]",
+									"value": "Mr. Eriberto Connelly",
+									"description": "Optional",
+									"disabled": true
+								},
+								{
+									"key": "sku[eq]",
+									"value": "701Q23699794343",
+									"description": "Optional",
+									"disabled": true
+								},
+								{
+									"key": "userId[eq]",
+									"value": "2",
+									"description": "Optional",
+									"disabled": true
+								},
+								{
+									"key": "stock[gt]",
+									"value": "10",
+									"description": "Optional ('eq', 'gt', 'gte', 'lt',  'lte')",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "All items",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url_v1}}/item",
+									"host": [
+										"{{url_v1}}"
+									],
+									"path": [
+										"item"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.7"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 21 Aug 2024 16:12:22 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"id\": 1,\n            \"userId\": 1,\n            \"name\": \"Dr. Kelly Bernhard MD\",\n            \"stock\": 54,\n            \"sku\": \"0113127527A6145\",\n            \"reorderLevel\": 22\n        },\n        {\n            \"id\": 2,\n            \"userId\": 2,\n            \"name\": \"Prof. Hayley Nitzsche II\",\n            \"stock\": 56,\n            \"sku\": \"874545723L97336\",\n            \"reorderLevel\": 17\n        },\n        {\n            \"id\": 3,\n            \"userId\": 3,\n            \"name\": \"Angus Littel\",\n            \"stock\": 18,\n            \"sku\": \"944133017618T34\",\n            \"reorderLevel\": 15\n        },\n        {\n            \"id\": 4,\n            \"userId\": 4,\n            \"name\": \"Marjory Anderson\",\n            \"stock\": 7,\n            \"sku\": \"05669313386H058\",\n            \"reorderLevel\": 25\n        },\n        {\n            \"id\": 5,\n            \"userId\": 5,\n            \"name\": \"Shaniya Beier I\",\n            \"stock\": 10,\n            \"sku\": \"017985707404Q67\",\n            \"reorderLevel\": 18\n        },\n        {\n            \"id\": 6,\n            \"userId\": 6,\n            \"name\": \"Prof. Ayla Reilly\",\n            \"stock\": 70,\n            \"sku\": \"9670M9179316280\",\n            \"reorderLevel\": 17\n        },\n        {\n            \"id\": 7,\n            \"userId\": 7,\n            \"name\": \"Mrs. Mittie Eichmann V\",\n            \"stock\": 51,\n            \"sku\": \"Z89983504341136\",\n            \"reorderLevel\": 18\n        },\n        {\n            \"id\": 8,\n            \"userId\": 8,\n            \"name\": \"Prof. Shayne Gerhold\",\n            \"stock\": 99,\n            \"sku\": \"701Q23699794343\",\n            \"reorderLevel\": 18\n        },\n        {\n            \"id\": 9,\n            \"userId\": 9,\n            \"name\": \"Mr. Eriberto Connelly\",\n            \"stock\": 87,\n            \"sku\": \"389938G74980588\",\n            \"reorderLevel\": 22\n        },\n        {\n            \"id\": 10,\n            \"userId\": 10,\n            \"name\": \"Charles Pfannerstill\",\n            \"stock\": 9,\n            \"sku\": \"711C58540544695\",\n            \"reorderLevel\": 16\n        },\n        {\n            \"id\": 11,\n            \"userId\": 11,\n            \"name\": \"Iva Brown\",\n            \"stock\": 17,\n            \"sku\": \"6H4471896115167\",\n            \"reorderLevel\": 25\n        },\n        {\n            \"id\": 12,\n            \"userId\": 12,\n            \"name\": \"Mrs. Ardith Mueller\",\n            \"stock\": 52,\n            \"sku\": \"4949920090J3056\",\n            \"reorderLevel\": 15\n        },\n        {\n            \"id\": 13,\n            \"userId\": 13,\n            \"name\": \"Kade Crist\",\n            \"stock\": 0,\n            \"sku\": \"40914731682F331\",\n            \"reorderLevel\": 21\n        },\n        {\n            \"id\": 14,\n            \"userId\": 14,\n            \"name\": \"Gordon Hauck\",\n            \"stock\": 47,\n            \"sku\": \"M67275466361948\",\n            \"reorderLevel\": 25\n        },\n        {\n            \"id\": 15,\n            \"userId\": 15,\n            \"name\": \"Loma Altenwerth\",\n            \"stock\": 61,\n            \"sku\": \"38546732500T668\",\n            \"reorderLevel\": 18\n        }\n    ],\n    \"links\": {\n        \"first\": \"http://127.0.0.1:8000/api/v1/item?page=1\",\n        \"last\": \"http://127.0.0.1:8000/api/v1/item?page=2\",\n        \"prev\": null,\n        \"next\": \"http://127.0.0.1:8000/api/v1/item?page=2\"\n    },\n    \"meta\": {\n        \"current_page\": 1,\n        \"from\": 1,\n        \"last_page\": 2,\n        \"links\": [\n            {\n                \"url\": null,\n                \"label\": \"&laquo; Previous\",\n                \"active\": false\n            },\n            {\n                \"url\": \"http://127.0.0.1:8000/api/v1/item?page=1\",\n                \"label\": \"1\",\n                \"active\": true\n            },\n            {\n                \"url\": \"http://127.0.0.1:8000/api/v1/item?page=2\",\n                \"label\": \"2\",\n                \"active\": false\n            },\n            {\n                \"url\": \"http://127.0.0.1:8000/api/v1/item?page=2\",\n                \"label\": \"Next &raquo;\",\n                \"active\": false\n            }\n        ],\n        \"path\": \"http://127.0.0.1:8000/api/v1/item\",\n        \"per_page\": 15,\n        \"to\": 15,\n        \"total\": 25\n    }\n}"
+						},
+						{
+							"name": "All Items with lowStock",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url_v1}}/item?lowStock=true",
+									"host": [
+										"{{url_v1}}"
+									],
+									"path": [
+										"item"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "lowStock",
+											"value": "true"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.7"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 21 Aug 2024 18:32:33 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"id\": 4,\n            \"userId\": 4,\n            \"name\": \"Marjory Anderson\",\n            \"stock\": 7,\n            \"sku\": \"05669313386H058\",\n            \"reorderLevel\": 25\n        },\n        {\n            \"id\": 5,\n            \"userId\": 5,\n            \"name\": \"Shaniya Beier I\",\n            \"stock\": 10,\n            \"sku\": \"017985707404Q67\",\n            \"reorderLevel\": 18\n        },\n        {\n            \"id\": 10,\n            \"userId\": 10,\n            \"name\": \"Charles Pfannerstill\",\n            \"stock\": 9,\n            \"sku\": \"711C58540544695\",\n            \"reorderLevel\": 16\n        },\n        {\n            \"id\": 11,\n            \"userId\": 11,\n            \"name\": \"Iva Brown\",\n            \"stock\": 17,\n            \"sku\": \"6H4471896115167\",\n            \"reorderLevel\": 25\n        },\n        {\n            \"id\": 13,\n            \"userId\": 13,\n            \"name\": \"Kade Crist\",\n            \"stock\": 0,\n            \"sku\": \"40914731682F331\",\n            \"reorderLevel\": 21\n        },\n        {\n            \"id\": 24,\n            \"userId\": 24,\n            \"name\": \"Mrs. Una Mitchell\",\n            \"stock\": 12,\n            \"sku\": \"67O901945572894\",\n            \"reorderLevel\": 22\n        }\n    ],\n    \"links\": {\n        \"first\": \"http://127.0.0.1:8000/api/v1/item?lowStock=true&page=1\",\n        \"last\": \"http://127.0.0.1:8000/api/v1/item?lowStock=true&page=1\",\n        \"prev\": null,\n        \"next\": null\n    },\n    \"meta\": {\n        \"current_page\": 1,\n        \"from\": 1,\n        \"last_page\": 1,\n        \"links\": [\n            {\n                \"url\": null,\n                \"label\": \"&laquo; Previous\",\n                \"active\": false\n            },\n            {\n                \"url\": \"http://127.0.0.1:8000/api/v1/item?lowStock=true&page=1\",\n                \"label\": \"1\",\n                \"active\": true\n            },\n            {\n                \"url\": null,\n                \"label\": \"Next &raquo;\",\n                \"active\": false\n            }\n        ],\n        \"path\": \"http://127.0.0.1:8000/api/v1/item\",\n        \"per_page\": 15,\n        \"to\": 6,\n        \"total\": 6\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "By sku",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url_v1}}/item/0113127527A6145",
+							"host": [
+								"{{url_v1}}"
+							],
+							"path": [
+								"item",
+								"0113127527A6145"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "By sku",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url_v1}}/item/0113127527A6145",
+									"host": [
+										"{{url_v1}}"
+									],
+									"path": [
+										"item",
+										"0113127527A6145"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.7"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 21 Aug 2024 16:13:32 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": 1,\n        \"userId\": 1,\n        \"name\": \"Dr. Kelly Bernhard MD\",\n        \"stock\": 54,\n        \"sku\": \"0113127527A6145\",\n        \"reorderLevel\": 22\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Item",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "userId",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "Door",
+									"type": "text"
+								},
+								{
+									"key": "stock",
+									"value": "120",
+									"type": "text"
+								},
+								{
+									"key": "reorderLevel",
+									"value": "11",
+									"type": "text"
+								},
+								{
+									"key": "sku",
+									"value": "abdc123",
+									"description": "Optional param",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url_v1}}/item",
+							"host": [
+								"{{url_v1}}"
+							],
+							"path": [
+								"item"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "New Item",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "userId",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "name",
+											"value": "Door",
+											"type": "text"
+										},
+										{
+											"key": "stock",
+											"value": "120",
+											"type": "text"
+										},
+										{
+											"key": "reorderLevel",
+											"value": "11",
+											"type": "text"
+										},
+										{
+											"key": "sku",
+											"value": "abdc123",
+											"description": "Optional param",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url_v1}}/item",
+									"host": [
+										"{{url_v1}}"
+									],
+									"path": [
+										"item"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.7"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 21 Aug 2024 16:38:18 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"user_id\": \"1\",\n    \"name\": \"Door\",\n    \"stock\": \"120\",\n    \"sku\": \"91474665540N748\",\n    \"reorder_level\": \"11\",\n    \"updated_at\": \"2024-08-21T16:38:18.000000Z\",\n    \"created_at\": \"2024-08-21T16:38:18.000000Z\",\n    \"id\": 26\n}"
+						}
+					]
+				},
+				{
+					"name": "Item",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "New Door",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url_v1}}/item/25",
+							"host": [
+								"{{url_v1}}"
+							],
+							"path": [
+								"item",
+								"25"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Item",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "userId",
+									"value": "5",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "New Door",
+									"type": "text"
+								},
+								{
+									"key": "stock",
+									"value": "11",
+									"type": "text"
+								},
+								{
+									"key": "sku",
+									"value": "SKU1234",
+									"type": "text"
+								},
+								{
+									"key": "reorderLevel",
+									"value": "5",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url_v1}}/item/25",
+							"host": [
+								"{{url_v1}}"
+							],
+							"path": [
+								"item",
+								"25"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Stock",
+			"item": [
+				{
+					"name": "by SKU",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url_v1}}/stock/67231218J075085",
+							"host": [
+								"{{url_v1}}"
+							],
+							"path": [
+								"stock",
+								"67231218J075085"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "by sku",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url_v1}}/stock/67231218J075085",
+									"host": [
+										"{{url_v1}}"
+									],
+									"path": [
+										"stock",
+										"67231218J075085"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.7"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 21 Aug 2024 16:50:29 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"stock\": 21,\n        \"reorderLevel\": 15,\n        \"level\": \"ok\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "By SKU",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "action",
+									"value": "add",
+									"description": "Only two options \"add\" and \"reduce\"",
+									"type": "text"
+								},
+								{
+									"key": "sku",
+									"value": "67231218J075085",
+									"type": "text"
+								},
+								{
+									"key": "qty",
+									"value": "20",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url_v1}}/stock/67231218J075085",
+							"host": [
+								"{{url_v1}}"
+							],
+							"path": [
+								"stock",
+								"67231218J075085"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Add stock by sku",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "action",
+											"value": "add",
+											"description": "Only two options \"add\" and \"reduce\"",
+											"type": "text"
+										},
+										{
+											"key": "sku",
+											"value": "67231218J075085",
+											"type": "text"
+										},
+										{
+											"key": "qty",
+											"value": "12",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url_v1}}/stock/67231218J075085",
+									"host": [
+										"{{url_v1}}"
+									],
+									"path": [
+										"stock",
+										"67231218J075085"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.7"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 21 Aug 2024 16:47:56 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": 21,\n        \"userId\": 21,\n        \"name\": \"Giovanna Stiedemann\",\n        \"stock\": 33,\n        \"sku\": \"67231218J075085\",\n        \"reorderLevel\": 15\n    }\n}"
+						},
+						{
+							"name": "Reduce Stock by SKU",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "action",
+											"value": "reduce",
+											"description": "Only two options \"add\" and \"reduce\"",
+											"type": "text"
+										},
+										{
+											"key": "sku",
+											"value": "67231218J075085",
+											"type": "text"
+										},
+										{
+											"key": "qty",
+											"value": "20",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url_v1}}/stock/67231218J075085",
+									"host": [
+										"{{url_v1}}"
+									],
+									"path": [
+										"stock",
+										"67231218J075085"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.7"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 21 Aug 2024 16:48:27 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": 21,\n        \"userId\": 21,\n        \"name\": \"Giovanna Stiedemann\",\n        \"stock\": 1,\n        \"sku\": \"67231218J075085\",\n        \"reorderLevel\": 15\n    }\n}"
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer"
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url_v1",
+			"value": "http://127.0.0.1:8000/api/v1",
+			"type": "string"
+		},
+		{
+			"key": "auth_token",
+			"value": "1|jE7cp6FRJDKn9N54ASjWterHfYSXHvRuAtRg1ldJa78bb75e",
+			"type": "string"
+		}
+	]
+}
