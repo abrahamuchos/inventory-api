@@ -66,7 +66,9 @@ To run a specific test
  $ php artisan test --filter test_name_example
 ```
 
-## Usage/Examples
+## 📄 Docs
+
+[Invoice API Collection - Postman](https://documenter.getpostman.com/view/6168326/2sAYJ3DLtQ)
 
 [Invoice API Collection - Postman](https://www.postman.com/abrahamuchos/workspace/public-projects/collection/6168326-0da64ad0-4488-42d8-bd8a-6b72b4e5023c?action=share&creator=6168326)
 
